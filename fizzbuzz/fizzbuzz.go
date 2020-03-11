@@ -13,7 +13,7 @@ func Fizzbuzz(nums []int) error {
 		switch {
 			case fizz && buzz: fmt.Println("FizzBuzz")
 			case fizz:         fmt.Println("Fizz")
-			case buzz:				 fmt.Println("Buzz")
+			case buzz:         fmt.Println("Buzz")
 			default:           fmt.Println(i)
 		}
 	}
