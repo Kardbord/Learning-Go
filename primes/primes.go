@@ -1,7 +1,6 @@
 package primes
 
-// Returns a closure that will generate sequential primes
-// beginning with 1.
+// Returns a closure that will generate sequential primes beginning with 2.
 // For all those times when you want to generate primes, but only one at a time. :)
 func SequentialPrime() func() uint64 {
 	n := uint64(2)

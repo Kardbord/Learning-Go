@@ -138,7 +138,8 @@ func runPrimes() error {
 	if err != nil { return err }
 	primeClosure := primes.SequentialPrime()
 	for i := uint64(1); i <= numPrimes; i++ {
-		fmt.Println(primeClosure())
+		fmt.Println(primeClosure()) // Yeah yeah, I should just use the Sieve to generate them all in one go.
+																// But this way, I get to learn about closures!
 	}
 	return nil
 }
