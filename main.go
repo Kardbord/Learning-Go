@@ -6,6 +6,7 @@ import (
 	"os"
 	fib "scratch/fibonacci"
 	"scratch/fizzbuzz"
+	"scratch/primes"
 	"strconv"
 )
 
@@ -40,6 +41,12 @@ var knownPrograms = map[string]program {
 		"The 'fibonacci' program takes any number of base-10 16-bit unsigned integer arguments.\n" +
 			"For each of these arguments, the value of their place in the fibonacci sequence is calculated.",
 		runFib,
+	},
+	"primes" : {
+		"primes",
+		"The 'primes' program takes a single base-10 integer argument and generates that many primes.\n" +
+			"    $1 : The number of primes to generate",
+			runPrimes,
 	},
 }
 
@@ -120,6 +127,20 @@ func runFizzBuzz() error {
 		if err != nil { return err }
 		return fizzbuzz.Fizzbuzz(list)
 	}
+}
+
+func runPrimes() error {
+	pArgs := os.Args[2:]
+	if len(pArgs) != 1 {
+		return fmt.Errorf("primes requires exactly 1 argument; %d arguments provided", len(pArgs))
+	}
+	numPrimes, err := strconv.ParseUint(pArgs[0], 10, 16)
+	if err != nil { return err }
+	primeClosure := primes.SequentialPrime()
+	for i := uint64(1); i <= numPrimes; i++ {
+		fmt.Println(primeClosure())
+	}
+	return nil
 }
 
 // ------------------------------------ HELPERS ----------------------------------- //
