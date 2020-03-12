@@ -2,14 +2,20 @@ package primes
 
 // Returns a closure that will generate sequential primes
 // beginning with 1.
+// For all those times when you want to generate primes, but only one at a time. :)
 func SequentialPrime() func() uint64 {
 	n := uint64(2)
 	primesToN := SieveOfEratosthenes(n)
+	lastNumPrimes := len(primesToN)
 	
 	return func() uint64 {
-		defer func(){n++}()
-		
-		primesToN = SieveOfEratosthenes(n)
+		defer func(){
+			for len(primesToN) == lastNumPrimes {
+				primesToN = SieveOfEratosthenes(n)
+				n++
+			}
+			lastNumPrimes = len(primesToN)
+		}()
 		
 		return primesToN[len(primesToN)-1]
 	}
